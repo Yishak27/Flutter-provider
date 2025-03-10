@@ -36,6 +36,7 @@ class CounterProviderWidget extends StatefulWidget {
 class _CounterProviderWidgetState extends State<CounterProviderWidget> {
   @override
   Widget build(BuildContext context) {
+    final counter = Provider.of<Countermodel>(context);
     return Scaffold(
       appBar: AppBar(title: Text('Counter Provider Example')),
       body: Card(
@@ -43,18 +44,13 @@ class _CounterProviderWidgetState extends State<CounterProviderWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("this is provider test"),
+              Text(
+                "This is provider test ${counter.values}",
+                style: TextStyle(fontSize: 24.0),
+              ),
               ElevatedButton(
                 onPressed: () {
-                  AlertDialog(
-                    actions: [
-                      TextButton(onPressed: () {}, child: Text("Cancel")),
-                    ],
-                    title: Text('Increment Counter'),
-                    content: Text(
-                      'Are you sure you want to increment the counter?',
-                    ),
-                  );
+                  counter.increment();
                 },
                 child: Text("Increment"),
               ),
