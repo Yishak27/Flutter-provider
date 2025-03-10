@@ -44,15 +44,40 @@ class _CounterProviderWidgetState extends State<CounterProviderWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "This is provider test ${counter.values}",
-                style: TextStyle(fontSize: 24.0),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "This is provider test ${counter.values}",
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      counter.increment();
+                    },
+                    child: Text("Increment"),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  counter.increment();
+              Consumer<Countermodel>(
+                builder: (
+                  BuildContext context,
+                  Countermodel value,
+                  Widget? child,
+                ) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("With consumer ${value.values}"),
+                      ElevatedButton(
+                        onPressed: () {
+                          value.increment();
+                        },
+                        child: Icon(Icons.add),
+                      ),
+                    ],
+                  );
                 },
-                child: Text("Increment"),
               ),
             ],
           ),
